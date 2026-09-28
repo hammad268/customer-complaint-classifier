@@ -16,7 +16,7 @@
 
 ## 📌 Overview
 
-This project builds a **multi-class text classifier** that reads a customer's complaint and predicts which financial **product category** it belongs to (for example: credit reporting, debt collection, mortgage, and so on). This kind of model is used in real support systems to **route complaints automatically** to the right team.
+This project builds a **multi-class text classifier** that reads a customer's complaint and predicts which financial **product category** it belongs to (one of **9 categories**, such as credit reporting, debt collection, mortgage, student loan, and more). This kind of model is used in real support systems to **route complaints automatically** to the right team.
 
 The project applies core NLP concepts: **text preprocessing, Bag-of-Words / TF-IDF vectorization, and a linear classifier**, on real-world data.
 
@@ -43,15 +43,21 @@ The project applies core NLP concepts: **text preprocessing, Bag-of-Words / TF-I
 
 ### 🏷️ Categories the model was trained on
 
-The model predicts one of the `Product` categories present in the 20k sample:
+The model classifies each complaint into one of **9 product categories**:
 
-| # | Category | Samples |
-|---|---|---|
-| 1 | _fill in_ | _fill in_ |
-| 2 | _fill in_ | _fill in_ |
-| 3 | _fill in_ | _fill in_ |
+| # | Category |
+|---|---|
+| 1 | Checking or savings account |
+| 2 | Credit card or prepaid card |
+| 3 | Credit reporting, credit repair services, or other personal consumer reports |
+| 4 | Debt collection |
+| 5 | Money transfer, virtual currency, or money service |
+| 6 | Mortgage |
+| 7 | Payday loan, title loan, or personal loan |
+| 8 | Student loan |
+| 9 | Vehicle loan or lease |
 
-> Run the script once, it prints the exact category list and counts (`df["product"].value_counts()`), then paste them into this table.
+> The 20,000-complaint sample was drawn evenly across these categories (up to ~2,222 complaints each) so no single class dominates training.
 
 ## ⚙️ Pipeline
 
@@ -89,8 +95,8 @@ Raw complaint text
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/hammad268/customer-complaint-classifier.git
-cd customer-complaint-classifier
+git clone https://github.com/hammad268/customer-complaint-classifier-nlp.git
+cd customer-complaint-classifier-nlp
 ```
 
 ### 2. Install dependencies
@@ -227,7 +233,7 @@ print(predict_complaint("I was charged a late fee even though I paid on time."))
 ## 📁 Project Structure
 
 ```
-customer-complaint-classifier/
+customer-complaint-classifier-nlp/
 ├── complaint_classifier.py   # full pipeline: sample → clean → train → evaluate → save
 ├── README.md
 ├── requirements.txt
@@ -245,7 +251,7 @@ customer-complaint-classifier/
 
 - Compare **Bag-of-Words vs TF-IDF** and other models (Naive Bayes, Linear SVM, Random Forest).
 - Add **n-grams** (`ngram_range=(1, 2)`) and hyperparameter tuning.
-- Merge overlapping categories to lift per-class F1.
+- Merge overlapping categories (e.g. the credit reporting group) to lift per-class F1.
 - Try transformer models (e.g., DistilBERT) for higher accuracy.
 - Deploy as a small **Streamlit / FastAPI** app.
 
